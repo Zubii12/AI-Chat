@@ -1,6 +1,6 @@
 name: ai_chat
 description: "A new Flutter project."
-publish_to: 'none'
+publish_to: "none"
 version: 0.1.0+1
 
 environment:
@@ -20,9 +20,9 @@ dependencies:
 dev_dependencies:
   bloc_lint: ^0.4.1
   build_runner: ^2.15.0
+  flutter_lints: ^6.0.0
   flutter_test:
     sdk: flutter
-  flutter_lints: ^6.0.0
   freezed: ^3.2.5
   json_serializable: ^6.14.0
   very_good_analysis: ^10.2.0

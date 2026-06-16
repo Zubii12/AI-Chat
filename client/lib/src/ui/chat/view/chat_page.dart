@@ -8,4 +8,3 @@ class ChatPage extends StatelessWidget {
     return const Placeholder();
   }
 }
-
