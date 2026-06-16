@@ -1,46 +1,95 @@
-// Follow this setup guide to integrate the Deno language server with your editor:
-// https://deno.land/manual/getting_started/setup_your_environment
-// This enables autocomplete, go to definition, etc.
-
-// Setup type definitions for built-in Supabase Runtime APIs
 import "@supabase/functions-js/edge-runtime.d.ts";
 import { withSupabase } from "@supabase/server";
 
-console.log("Hello from Functions!");
+interface OutputItem {
+  type: string;
+  content?: ContentItem[];
+}
 
-// This endpoint uses 'publishable' | 'secret' access, apiKey is required.
-// Use publishable for Client-facing, key-validated endpoints
-// Use secret for Server-to-server, internal calls
-export default {
-  fetch: withSupabase({ auth: ["publishable", "secret"] }, async (req, ctx) => {
-    // Called by another service with a secret key
-    // ctx.supabaseAdmin bypasses RLS — use for privileged operations
-    /*
-    if (ctx.authMode === "secret") {
-      const { user_id } = await req.json();
-      const { data } = await ctx.supabaseAdmin.auth.admin.getUserById(user_id);
+interface ContentItem {
+  type: string;
+  text?: string;
+}
 
-      return Response.json({
-        email: data?.user?.email,
-      });
+interface OpenAIResponse {
+  output_text?: string;
+  output?: OutputItem[];
+}
+
+function parseResponse(data: OpenAIResponse) {
+  if ("output_text" in data && data.output_text) {
+    return data.output_text;
+  }
+
+  if ("output" in data && data.output !== undefined) {
+    const text = data.output
+      .flatMap((item) => item.content ?? [])
+      .filter((item) => item.type === "output_text" && item.text !== undefined)
+      .map((item) => item.text)
+      .join("");
+
+    if (text !== "") {
+      return text;
     }
-    */
+  }
 
-    const { name } = await req.json();
+  throw Error("OPENAI error: response did not include final text");
+}
 
-    return Response.json({
-      message: `Hello ${name}!`,
-    });
+export default {
+  fetch: withSupabase({ auth: ["publishable"] }, async (req, _) => {
+    try {
+      if (req.method !== "POST") {
+        return new Response("Method not allowed", { status: 405 });
+      }
+
+      const openaiKey = Deno.env.get("OPENAI_API_KEY");
+
+      if (!openaiKey) {
+        return Response.json(
+          { error: "OPENAI API Key not set" },
+          { status: 500 },
+        );
+      }
+
+      const body = await req.json();
+
+      const response = await fetch(
+        "https://api.openai.com/v1/responses",
+        {
+          method: "POST",
+          headers: {
+            "Authorization": `Bearer ${openaiKey}`,
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            model: "gpt-5-mini",
+            input: body.message,
+          }),
+        },
+      );
+
+      if (!response.ok) {
+        return Response.json(
+          { error: await response.text() },
+          { status: response.status },
+        );
+      }
+
+      const data = await response.json();
+
+      const textResult = parseResponse(data);
+
+      console.log("OpenAI response:", data);
+
+      return Response.json(textResult);
+    } catch (error) {
+      console.error("Error in send_message function:", error);
+
+      return Response.json(
+        { error: "Internal server error" },
+        { status: 500 },
+      );
+    }
   }),
 };
-
-/* To invoke locally:
-
-  1. Run `supabase start` (see: https://supabase.com/docs/reference/cli/supabase-start)
-  2. Make an HTTP request:
-
-  curl -i --location --request POST 'http://127.0.0.1:54321/functions/v1/send_message' \
-    --header 'apiKey: sb_publishable_ACJWlzQHlZjBrEguHvfOxg_3BJgxAaH' \
-    --data '{"name":"Functions"}'
-
-*/
