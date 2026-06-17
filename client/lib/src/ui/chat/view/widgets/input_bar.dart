@@ -26,6 +26,10 @@ class _InputBarState extends State<InputBar> {
     if (currentState == null) return;
     if (!currentState.validate()) return;
 
+    final isSending = context.read<ChatCubit>().state.isSending;
+
+    if (isSending) return;
+
     unawaited(context.read<ChatCubit>().sendMessage(_controller.text));
     _controller.clear();
   }
