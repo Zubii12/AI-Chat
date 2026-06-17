@@ -6,6 +6,14 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(routes: AppRouter.routes);
+    return MaterialApp(
+      theme: ThemeData(useMaterial3: true, colorSchemeSeed: Colors.blue),
+      darkTheme: ThemeData(
+        useMaterial3: true,
+        colorSchemeSeed: Colors.blue,
+        brightness: .dark,
+      ),
+      routes: AppRouter.routes,
+    );
   }
 }
