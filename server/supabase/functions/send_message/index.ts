@@ -1,5 +1,6 @@
 import "@supabase/functions-js/edge-runtime.d.ts";
 import { withSupabase } from "@supabase/server";
+import { systemPrompt } from "./system_prompt.ts";
 
 interface OutputItem {
   type: string;
@@ -54,6 +55,19 @@ export default {
 
       const body = await req.json();
 
+      const newMessage = body.message;
+      const history = body.history || [];
+
+      const messages = [
+        { role: "developer", content: systemPrompt },
+
+        ...history.map((
+          { role, content }: { role: string; content: string },
+        ) => ({ role, content })),
+
+        { role: "user", content: newMessage },
+      ];
+
       const response = await fetch(
         "https://api.openai.com/v1/responses",
         {
@@ -82,11 +96,9 @@ export default {
 
       const textResult = parseResponse(data);
 
-      console.log("OpenAI response:", data);
-
       return Response.json(textResult);
     } catch (error) {
-      console.error("Error in send_message function:", error);
+      console.error("Error in send_message function", error);
 
       return Response.json(
         { error: "Internal server error" },

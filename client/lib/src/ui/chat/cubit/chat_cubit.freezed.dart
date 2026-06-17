@@ -14,30 +14,65 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$ChatState {
 
-
+ List<Message> get messages; bool get isLoading; bool get isSending; bool get isOtherTyping; String get errorMessage;
+/// Create a copy of ChatState
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$ChatStateCopyWith<ChatState> get copyWith => _$ChatStateCopyWithImpl<ChatState>(this as ChatState, _$identity);
 
 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is ChatState);
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is ChatState&&const DeepCollectionEquality().equals(other.messages, messages)&&(identical(other.isLoading, isLoading) || other.isLoading == isLoading)&&(identical(other.isSending, isSending) || other.isSending == isSending)&&(identical(other.isOtherTyping, isOtherTyping) || other.isOtherTyping == isOtherTyping)&&(identical(other.errorMessage, errorMessage) || other.errorMessage == errorMessage));
 }
 
 
 @override
-int get hashCode => runtimeType.hashCode;
+int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(messages),isLoading,isSending,isOtherTyping,errorMessage);
 
 @override
 String toString() {
-  return 'ChatState()';
+  return 'ChatState(messages: $messages, isLoading: $isLoading, isSending: $isSending, isOtherTyping: $isOtherTyping, errorMessage: $errorMessage)';
 }
 
 
 }
 
 /// @nodoc
-class $ChatStateCopyWith<$Res>  {
-$ChatStateCopyWith(ChatState _, $Res Function(ChatState) __);
+abstract mixin class $ChatStateCopyWith<$Res>  {
+  factory $ChatStateCopyWith(ChatState value, $Res Function(ChatState) _then) = _$ChatStateCopyWithImpl;
+@useResult
+$Res call({
+ List<Message> messages, bool isLoading, bool isSending, bool isOtherTyping, String errorMessage
+});
+
+
+
+
+}
+/// @nodoc
+class _$ChatStateCopyWithImpl<$Res>
+    implements $ChatStateCopyWith<$Res> {
+  _$ChatStateCopyWithImpl(this._self, this._then);
+
+  final ChatState _self;
+  final $Res Function(ChatState) _then;
+
+/// Create a copy of ChatState
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') @override $Res call({Object? messages = null,Object? isLoading = null,Object? isSending = null,Object? isOtherTyping = null,Object? errorMessage = null,}) {
+  return _then(_self.copyWith(
+messages: null == messages ? _self.messages : messages // ignore: cast_nullable_to_non_nullable
+as List<Message>,isLoading: null == isLoading ? _self.isLoading : isLoading // ignore: cast_nullable_to_non_nullable
+as bool,isSending: null == isSending ? _self.isSending : isSending // ignore: cast_nullable_to_non_nullable
+as bool,isOtherTyping: null == isOtherTyping ? _self.isOtherTyping : isOtherTyping // ignore: cast_nullable_to_non_nullable
+as bool,errorMessage: null == errorMessage ? _self.errorMessage : errorMessage // ignore: cast_nullable_to_non_nullable
+as String,
+  ));
+}
+
 }
 
 
@@ -55,14 +90,11 @@ extension ChatStatePatterns on ChatState {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _ChatInitial value)?  initial,TResult Function( _ChatLoading value)?  loading,TResult Function( _ChatSuccess value)?  success,TResult Function( _ChatError value)?  error,required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _ChatState value)?  $default,{required TResult orElse(),}){
 final _that = this;
 switch (_that) {
-case _ChatInitial() when initial != null:
-return initial(_that);case _ChatLoading() when loading != null:
-return loading(_that);case _ChatSuccess() when success != null:
-return success(_that);case _ChatError() when error != null:
-return error(_that);case _:
+case _ChatState() when $default != null:
+return $default(_that);case _:
   return orElse();
 
 }
@@ -80,14 +112,11 @@ return error(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _ChatInitial value)  initial,required TResult Function( _ChatLoading value)  loading,required TResult Function( _ChatSuccess value)  success,required TResult Function( _ChatError value)  error,}){
+@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _ChatState value)  $default,){
 final _that = this;
 switch (_that) {
-case _ChatInitial():
-return initial(_that);case _ChatLoading():
-return loading(_that);case _ChatSuccess():
-return success(_that);case _ChatError():
-return error(_that);}
+case _ChatState():
+return $default(_that);}
 }
 /// A variant of `map` that fallback to returning `null`.
 ///
@@ -101,14 +130,11 @@ return error(_that);}
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _ChatInitial value)?  initial,TResult? Function( _ChatLoading value)?  loading,TResult? Function( _ChatSuccess value)?  success,TResult? Function( _ChatError value)?  error,}){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _ChatState value)?  $default,){
 final _that = this;
 switch (_that) {
-case _ChatInitial() when initial != null:
-return initial(_that);case _ChatLoading() when loading != null:
-return loading(_that);case _ChatSuccess() when success != null:
-return success(_that);case _ChatError() when error != null:
-return error(_that);case _:
+case _ChatState() when $default != null:
+return $default(_that);case _:
   return null;
 
 }
@@ -125,13 +151,10 @@ return error(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  initial,TResult Function()?  loading,TResult Function()?  success,TResult Function( String? error)?  error,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( List<Message> messages,  bool isLoading,  bool isSending,  bool isOtherTyping,  String errorMessage)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
-case _ChatInitial() when initial != null:
-return initial();case _ChatLoading() when loading != null:
-return loading();case _ChatSuccess() when success != null:
-return success();case _ChatError() when error != null:
-return error(_that.error);case _:
+case _ChatState() when $default != null:
+return $default(_that.messages,_that.isLoading,_that.isSending,_that.isOtherTyping,_that.errorMessage);case _:
   return orElse();
 
 }
@@ -149,13 +172,10 @@ return error(_that.error);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  initial,required TResult Function()  loading,required TResult Function()  success,required TResult Function( String? error)  error,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( List<Message> messages,  bool isLoading,  bool isSending,  bool isOtherTyping,  String errorMessage)  $default,) {final _that = this;
 switch (_that) {
-case _ChatInitial():
-return initial();case _ChatLoading():
-return loading();case _ChatSuccess():
-return success();case _ChatError():
-return error(_that.error);}
+case _ChatState():
+return $default(_that.messages,_that.isLoading,_that.isSending,_that.isOtherTyping,_that.errorMessage);}
 }
 /// A variant of `when` that fallback to returning `null`
 ///
@@ -169,13 +189,10 @@ return error(_that.error);}
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  initial,TResult? Function()?  loading,TResult? Function()?  success,TResult? Function( String? error)?  error,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( List<Message> messages,  bool isLoading,  bool isSending,  bool isOtherTyping,  String errorMessage)?  $default,) {final _that = this;
 switch (_that) {
-case _ChatInitial() when initial != null:
-return initial();case _ChatLoading() when loading != null:
-return loading();case _ChatSuccess() when success != null:
-return success();case _ChatError() when error != null:
-return error(_that.error);case _:
+case _ChatState() when $default != null:
+return $default(_that.messages,_that.isLoading,_that.isSending,_that.isOtherTyping,_that.errorMessage);case _:
   return null;
 
 }
@@ -186,139 +203,53 @@ return error(_that.error);case _:
 /// @nodoc
 
 
-class _ChatInitial implements ChatState {
-  const _ChatInitial();
+class _ChatState implements ChatState {
+  const _ChatState({final  List<Message> messages = const [], this.isLoading = false, this.isSending = false, this.isOtherTyping = false, this.errorMessage = ''}): _messages = messages;
   
 
-
-
-
-
-
-@override
-bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ChatInitial);
+ final  List<Message> _messages;
+@override@JsonKey() List<Message> get messages {
+  if (_messages is EqualUnmodifiableListView) return _messages;
+  // ignore: implicit_dynamic_type
+  return EqualUnmodifiableListView(_messages);
 }
 
-
-@override
-int get hashCode => runtimeType.hashCode;
-
-@override
-String toString() {
-  return 'ChatState.initial()';
-}
-
-
-}
-
-
-
-
-/// @nodoc
-
-
-class _ChatLoading implements ChatState {
-  const _ChatLoading();
-  
-
-
-
-
-
-
-@override
-bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ChatLoading);
-}
-
-
-@override
-int get hashCode => runtimeType.hashCode;
-
-@override
-String toString() {
-  return 'ChatState.loading()';
-}
-
-
-}
-
-
-
-
-/// @nodoc
-
-
-class _ChatSuccess implements ChatState {
-  const _ChatSuccess();
-  
-
-
-
-
-
-
-@override
-bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ChatSuccess);
-}
-
-
-@override
-int get hashCode => runtimeType.hashCode;
-
-@override
-String toString() {
-  return 'ChatState.success()';
-}
-
-
-}
-
-
-
-
-/// @nodoc
-
-
-class _ChatError implements ChatState {
-  const _ChatError([this.error]);
-  
-
- final  String? error;
+@override@JsonKey() final  bool isLoading;
+@override@JsonKey() final  bool isSending;
+@override@JsonKey() final  bool isOtherTyping;
+@override@JsonKey() final  String errorMessage;
 
 /// Create a copy of ChatState
 /// with the given fields replaced by the non-null parameter values.
-@JsonKey(includeFromJson: false, includeToJson: false)
+@override @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
-_$ChatErrorCopyWith<_ChatError> get copyWith => __$ChatErrorCopyWithImpl<_ChatError>(this, _$identity);
+_$ChatStateCopyWith<_ChatState> get copyWith => __$ChatStateCopyWithImpl<_ChatState>(this, _$identity);
 
 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ChatError&&(identical(other.error, error) || other.error == error));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ChatState&&const DeepCollectionEquality().equals(other._messages, _messages)&&(identical(other.isLoading, isLoading) || other.isLoading == isLoading)&&(identical(other.isSending, isSending) || other.isSending == isSending)&&(identical(other.isOtherTyping, isOtherTyping) || other.isOtherTyping == isOtherTyping)&&(identical(other.errorMessage, errorMessage) || other.errorMessage == errorMessage));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,error);
+int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(_messages),isLoading,isSending,isOtherTyping,errorMessage);
 
 @override
 String toString() {
-  return 'ChatState.error(error: $error)';
+  return 'ChatState(messages: $messages, isLoading: $isLoading, isSending: $isSending, isOtherTyping: $isOtherTyping, errorMessage: $errorMessage)';
 }
 
 
 }
 
 /// @nodoc
-abstract mixin class _$ChatErrorCopyWith<$Res> implements $ChatStateCopyWith<$Res> {
-  factory _$ChatErrorCopyWith(_ChatError value, $Res Function(_ChatError) _then) = __$ChatErrorCopyWithImpl;
-@useResult
+abstract mixin class _$ChatStateCopyWith<$Res> implements $ChatStateCopyWith<$Res> {
+  factory _$ChatStateCopyWith(_ChatState value, $Res Function(_ChatState) _then) = __$ChatStateCopyWithImpl;
+@override @useResult
 $Res call({
- String? error
+ List<Message> messages, bool isLoading, bool isSending, bool isOtherTyping, String errorMessage
 });
 
 
@@ -326,19 +257,23 @@ $Res call({
 
 }
 /// @nodoc
-class __$ChatErrorCopyWithImpl<$Res>
-    implements _$ChatErrorCopyWith<$Res> {
-  __$ChatErrorCopyWithImpl(this._self, this._then);
+class __$ChatStateCopyWithImpl<$Res>
+    implements _$ChatStateCopyWith<$Res> {
+  __$ChatStateCopyWithImpl(this._self, this._then);
 
-  final _ChatError _self;
-  final $Res Function(_ChatError) _then;
+  final _ChatState _self;
+  final $Res Function(_ChatState) _then;
 
 /// Create a copy of ChatState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') $Res call({Object? error = freezed,}) {
-  return _then(_ChatError(
-freezed == error ? _self.error : error // ignore: cast_nullable_to_non_nullable
-as String?,
+@override @pragma('vm:prefer-inline') $Res call({Object? messages = null,Object? isLoading = null,Object? isSending = null,Object? isOtherTyping = null,Object? errorMessage = null,}) {
+  return _then(_ChatState(
+messages: null == messages ? _self._messages : messages // ignore: cast_nullable_to_non_nullable
+as List<Message>,isLoading: null == isLoading ? _self.isLoading : isLoading // ignore: cast_nullable_to_non_nullable
+as bool,isSending: null == isSending ? _self.isSending : isSending // ignore: cast_nullable_to_non_nullable
+as bool,isOtherTyping: null == isOtherTyping ? _self.isOtherTyping : isOtherTyping // ignore: cast_nullable_to_non_nullable
+as bool,errorMessage: null == errorMessage ? _self.errorMessage : errorMessage // ignore: cast_nullable_to_non_nullable
+as String,
   ));
 }
 

@@ -1,3 +1,6 @@
 abstract class ChatService {
-  Future<void> sendMessage(String message);
+  Future<List<String>> sendMessage(
+    String message, {
+    required List<Map<String, dynamic>> history,
+  });
 }
