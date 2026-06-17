@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:ai_chat/src/domain/services/chat_service.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
@@ -18,7 +16,7 @@ class SupabaseChatService implements ChatService {
       body: {'message': message, 'history': history},
     );
 
-    final data = jsonDecode(response.data as String) as Map<String, dynamic>;
+    final data = response.data as Map<String, dynamic>;
     final messages = data['messages'] as List<dynamic>?;
 
     if (messages == null) {

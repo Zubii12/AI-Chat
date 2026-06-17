@@ -96,7 +96,7 @@ export default {
 
       const textResult = parseResponse(data);
 
-      return Response.json(textResult);
+      return Response.json(JSON.parse(textResult));
     } catch (error) {
       console.error("Error in send_message function", error);
 
