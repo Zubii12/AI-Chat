@@ -14,9 +14,7 @@ class ChatCubit extends Cubit<ChatState> {
   final ChatRepository _chatRepository;
 
   Future<void> sendMessage(String message) async {
-    emit(
-      state.copyWith(isSending: true, isOtherTyping: true, errorMessage: ''),
-    );
+    emit(state.copyWith(isSending: true, errorMessage: ''));
 
     // This is a temporary solution to generate a unique ID for the new message.
     // In a real application, you would typically get the ID from the server
@@ -30,24 +28,39 @@ class ChatCubit extends Cubit<ChatState> {
 
     emit(state.copyWith(messages: [...currentMessages, userMessage]));
 
+    await Future<void>.delayed(const Duration(milliseconds: 500));
+
+    emit(state.copyWith(isOtherTyping: true));
+
     try {
       final newMessages = await _chatRepository.sendMessage(
         userMessage,
         history: currentMessages,
       );
 
-      emit(
-        state.copyWith(
-          isSending: false,
-          messages: [...state.messages, ...newMessages],
-        ),
-      );
+      for (final message in newMessages) {
+        emit(state.copyWith(isOtherTyping: true));
+
+        await Future<void>.delayed(const Duration(seconds: 1));
+
+        emit(
+          state.copyWith(
+            messages: [...state.messages, message],
+            isOtherTyping: false,
+          ),
+        );
+
+        await Future<void>.delayed(const Duration(seconds: 1));
+      }
+
+      emit(state.copyWith(isSending: false, isOtherTyping: false));
     } on Exception catch (e, stackTrace) {
       log('Failed to send message: $e', stackTrace: stackTrace);
 
       emit(
         state.copyWith(
           isSending: false,
+          isOtherTyping: false,
           errorMessage: 'Failed to send message',
         ),
       );
