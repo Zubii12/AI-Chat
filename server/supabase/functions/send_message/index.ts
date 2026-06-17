@@ -63,8 +63,10 @@ export default {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
-            model: "gpt-5-mini",
-            input: body.message,
+            model: "gpt-4o-mini",
+            input: messages,
+            temperature: 0.7,
+            text: { format: { type: "json_object" } },
           }),
         },
       );
