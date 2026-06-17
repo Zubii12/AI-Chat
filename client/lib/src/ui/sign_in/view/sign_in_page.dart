@@ -2,7 +2,6 @@ import 'package:ai_chat/src/data/repositories/sign_in_repository.dart';
 import 'package:ai_chat/src/data/services/supabase_sign_in_service.dart';
 import 'package:ai_chat/src/domain/repositories/sign_in_repository.dart';
 import 'package:ai_chat/src/domain/services/sign_in_service.dart';
-import 'package:ai_chat/src/ui/router/app_router.dart';
 import 'package:ai_chat/src/ui/sign_in/cubit/sign_in_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
