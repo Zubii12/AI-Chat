@@ -31,7 +31,7 @@ client/
 1. Create a `.env` file in the `client/` directory:
    ```
    SUPABASE_URL=your_supabase_url
-   SUPABASE_ANON_KEY=your_supabase_anon_key
+   SUPABASE_PUBLISHABLE_KEY=your_supabase_publishable_key
    ```
 
 2. Install dependencies:
