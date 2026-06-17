@@ -26,10 +26,14 @@ class SupabaseSignInService implements SignInService {
       throw Exception('Could not find ID Token from generated credential.');
     }
 
-    await _client.auth.signInWithIdToken(
+    final response = await _client.auth.signInWithIdToken(
       provider: .apple,
       idToken: idToken,
       nonce: rawNonce,
     );
+
+    if (response.session == null) {
+      throw Exception('Failed to sign in with Apple: no session returned.');
+    }
   }
 }

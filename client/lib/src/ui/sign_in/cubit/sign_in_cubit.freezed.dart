@@ -125,13 +125,13 @@ return error(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  initial,TResult Function()?  loading,TResult Function()?  success,TResult Function( String? error)?  error,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  initial,TResult Function()?  loading,TResult Function()?  success,TResult Function( String message)?  error,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _SignInInitial() when initial != null:
 return initial();case _SignInLoading() when loading != null:
 return loading();case _SignInSuccess() when success != null:
 return success();case _SignInError() when error != null:
-return error(_that.error);case _:
+return error(_that.message);case _:
   return orElse();
 
 }
@@ -149,13 +149,13 @@ return error(_that.error);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  initial,required TResult Function()  loading,required TResult Function()  success,required TResult Function( String? error)  error,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  initial,required TResult Function()  loading,required TResult Function()  success,required TResult Function( String message)  error,}) {final _that = this;
 switch (_that) {
 case _SignInInitial():
 return initial();case _SignInLoading():
 return loading();case _SignInSuccess():
 return success();case _SignInError():
-return error(_that.error);}
+return error(_that.message);}
 }
 /// A variant of `when` that fallback to returning `null`
 ///
@@ -169,13 +169,13 @@ return error(_that.error);}
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  initial,TResult? Function()?  loading,TResult? Function()?  success,TResult? Function( String? error)?  error,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  initial,TResult? Function()?  loading,TResult? Function()?  success,TResult? Function( String message)?  error,}) {final _that = this;
 switch (_that) {
 case _SignInInitial() when initial != null:
 return initial();case _SignInLoading() when loading != null:
 return loading();case _SignInSuccess() when success != null:
 return success();case _SignInError() when error != null:
-return error(_that.error);case _:
+return error(_that.message);case _:
   return null;
 
 }
@@ -283,10 +283,10 @@ String toString() {
 
 
 class _SignInError implements SignInState {
-  const _SignInError([this.error]);
+  const _SignInError({required this.message});
   
 
- final  String? error;
+ final  String message;
 
 /// Create a copy of SignInState
 /// with the given fields replaced by the non-null parameter values.
@@ -298,16 +298,16 @@ _$SignInErrorCopyWith<_SignInError> get copyWith => __$SignInErrorCopyWithImpl<_
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _SignInError&&(identical(other.error, error) || other.error == error));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _SignInError&&(identical(other.message, message) || other.message == message));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,error);
+int get hashCode => Object.hash(runtimeType,message);
 
 @override
 String toString() {
-  return 'SignInState.error(error: $error)';
+  return 'SignInState.error(message: $message)';
 }
 
 
@@ -318,7 +318,7 @@ abstract mixin class _$SignInErrorCopyWith<$Res> implements $SignInStateCopyWith
   factory _$SignInErrorCopyWith(_SignInError value, $Res Function(_SignInError) _then) = __$SignInErrorCopyWithImpl;
 @useResult
 $Res call({
- String? error
+ String message
 });
 
 
@@ -335,10 +335,10 @@ class __$SignInErrorCopyWithImpl<$Res>
 
 /// Create a copy of SignInState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') $Res call({Object? error = freezed,}) {
+@pragma('vm:prefer-inline') $Res call({Object? message = null,}) {
   return _then(_SignInError(
-freezed == error ? _self.error : error // ignore: cast_nullable_to_non_nullable
-as String?,
+message: null == message ? _self.message : message // ignore: cast_nullable_to_non_nullable
+as String,
   ));
 }
 
