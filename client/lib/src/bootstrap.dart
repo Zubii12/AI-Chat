@@ -1,8 +1,14 @@
 import 'dart:async';
 import 'dart:developer';
 
+import 'package:ai_chat/src/data/repositories/auth_repository.dart';
+import 'package:ai_chat/src/data/services/supabase_auth_service.dart';
+import 'package:ai_chat/src/domain/repositories/auth_repository.dart';
+import 'package:ai_chat/src/domain/services/auth_service.dart';
+import 'package:ai_chat/src/ui/modules/cubit/auth_cubit.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 class AppBlocObserver extends BlocObserver {
   const AppBlocObserver();
@@ -27,5 +33,26 @@ Future<void> bootstrap(FutureOr<Widget> Function() builder) async {
 
   Bloc.observer = const AppBlocObserver();
 
-  runApp(await builder());
+  runApp(
+    MultiRepositoryProvider(
+      providers: [
+        RepositoryProvider<AuthService>(
+          create: (context) {
+            return SupabaseAuthService(client: Supabase.instance.client);
+          },
+        ),
+        RepositoryProvider<AuthRepository>(
+          create: (context) {
+            return AuthRepositoryImpl(authService: context.read<AuthService>());
+          },
+        ),
+      ],
+      child: BlocProvider(
+        create: (context) {
+          return AuthCubit(authRepository: context.read<AuthRepository>());
+        },
+        child: await builder(),
+      ),
+    ),
+  );
 }
