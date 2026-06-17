@@ -14,7 +14,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$ChatState {
 
- List<Message> get messages; bool get isLoading; bool get isSending; bool get isOtherTyping; String get errorMessage;
+ List<Message> get messages; bool get isSending; bool get isOtherTyping; String get errorMessage;
 /// Create a copy of ChatState
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -25,16 +25,16 @@ $ChatStateCopyWith<ChatState> get copyWith => _$ChatStateCopyWithImpl<ChatState>
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is ChatState&&const DeepCollectionEquality().equals(other.messages, messages)&&(identical(other.isLoading, isLoading) || other.isLoading == isLoading)&&(identical(other.isSending, isSending) || other.isSending == isSending)&&(identical(other.isOtherTyping, isOtherTyping) || other.isOtherTyping == isOtherTyping)&&(identical(other.errorMessage, errorMessage) || other.errorMessage == errorMessage));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is ChatState&&const DeepCollectionEquality().equals(other.messages, messages)&&(identical(other.isSending, isSending) || other.isSending == isSending)&&(identical(other.isOtherTyping, isOtherTyping) || other.isOtherTyping == isOtherTyping)&&(identical(other.errorMessage, errorMessage) || other.errorMessage == errorMessage));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(messages),isLoading,isSending,isOtherTyping,errorMessage);
+int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(messages),isSending,isOtherTyping,errorMessage);
 
 @override
 String toString() {
-  return 'ChatState(messages: $messages, isLoading: $isLoading, isSending: $isSending, isOtherTyping: $isOtherTyping, errorMessage: $errorMessage)';
+  return 'ChatState(messages: $messages, isSending: $isSending, isOtherTyping: $isOtherTyping, errorMessage: $errorMessage)';
 }
 
 
@@ -45,7 +45,7 @@ abstract mixin class $ChatStateCopyWith<$Res>  {
   factory $ChatStateCopyWith(ChatState value, $Res Function(ChatState) _then) = _$ChatStateCopyWithImpl;
 @useResult
 $Res call({
- List<Message> messages, bool isLoading, bool isSending, bool isOtherTyping, String errorMessage
+ List<Message> messages, bool isSending, bool isOtherTyping, String errorMessage
 });
 
 
@@ -62,11 +62,10 @@ class _$ChatStateCopyWithImpl<$Res>
 
 /// Create a copy of ChatState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? messages = null,Object? isLoading = null,Object? isSending = null,Object? isOtherTyping = null,Object? errorMessage = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? messages = null,Object? isSending = null,Object? isOtherTyping = null,Object? errorMessage = null,}) {
   return _then(_self.copyWith(
 messages: null == messages ? _self.messages : messages // ignore: cast_nullable_to_non_nullable
-as List<Message>,isLoading: null == isLoading ? _self.isLoading : isLoading // ignore: cast_nullable_to_non_nullable
-as bool,isSending: null == isSending ? _self.isSending : isSending // ignore: cast_nullable_to_non_nullable
+as List<Message>,isSending: null == isSending ? _self.isSending : isSending // ignore: cast_nullable_to_non_nullable
 as bool,isOtherTyping: null == isOtherTyping ? _self.isOtherTyping : isOtherTyping // ignore: cast_nullable_to_non_nullable
 as bool,errorMessage: null == errorMessage ? _self.errorMessage : errorMessage // ignore: cast_nullable_to_non_nullable
 as String,
@@ -151,10 +150,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( List<Message> messages,  bool isLoading,  bool isSending,  bool isOtherTyping,  String errorMessage)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( List<Message> messages,  bool isSending,  bool isOtherTyping,  String errorMessage)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _ChatState() when $default != null:
-return $default(_that.messages,_that.isLoading,_that.isSending,_that.isOtherTyping,_that.errorMessage);case _:
+return $default(_that.messages,_that.isSending,_that.isOtherTyping,_that.errorMessage);case _:
   return orElse();
 
 }
@@ -172,10 +171,10 @@ return $default(_that.messages,_that.isLoading,_that.isSending,_that.isOtherTypi
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( List<Message> messages,  bool isLoading,  bool isSending,  bool isOtherTyping,  String errorMessage)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( List<Message> messages,  bool isSending,  bool isOtherTyping,  String errorMessage)  $default,) {final _that = this;
 switch (_that) {
 case _ChatState():
-return $default(_that.messages,_that.isLoading,_that.isSending,_that.isOtherTyping,_that.errorMessage);}
+return $default(_that.messages,_that.isSending,_that.isOtherTyping,_that.errorMessage);}
 }
 /// A variant of `when` that fallback to returning `null`
 ///
@@ -189,10 +188,10 @@ return $default(_that.messages,_that.isLoading,_that.isSending,_that.isOtherTypi
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( List<Message> messages,  bool isLoading,  bool isSending,  bool isOtherTyping,  String errorMessage)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( List<Message> messages,  bool isSending,  bool isOtherTyping,  String errorMessage)?  $default,) {final _that = this;
 switch (_that) {
 case _ChatState() when $default != null:
-return $default(_that.messages,_that.isLoading,_that.isSending,_that.isOtherTyping,_that.errorMessage);case _:
+return $default(_that.messages,_that.isSending,_that.isOtherTyping,_that.errorMessage);case _:
   return null;
 
 }
@@ -204,7 +203,7 @@ return $default(_that.messages,_that.isLoading,_that.isSending,_that.isOtherTypi
 
 
 class _ChatState implements ChatState {
-  const _ChatState({final  List<Message> messages = const [], this.isLoading = false, this.isSending = false, this.isOtherTyping = false, this.errorMessage = ''}): _messages = messages;
+  const _ChatState({final  List<Message> messages = const [], this.isSending = false, this.isOtherTyping = false, this.errorMessage = ''}): _messages = messages;
   
 
  final  List<Message> _messages;
@@ -214,7 +213,6 @@ class _ChatState implements ChatState {
   return EqualUnmodifiableListView(_messages);
 }
 
-@override@JsonKey() final  bool isLoading;
 @override@JsonKey() final  bool isSending;
 @override@JsonKey() final  bool isOtherTyping;
 @override@JsonKey() final  String errorMessage;
@@ -229,16 +227,16 @@ _$ChatStateCopyWith<_ChatState> get copyWith => __$ChatStateCopyWithImpl<_ChatSt
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ChatState&&const DeepCollectionEquality().equals(other._messages, _messages)&&(identical(other.isLoading, isLoading) || other.isLoading == isLoading)&&(identical(other.isSending, isSending) || other.isSending == isSending)&&(identical(other.isOtherTyping, isOtherTyping) || other.isOtherTyping == isOtherTyping)&&(identical(other.errorMessage, errorMessage) || other.errorMessage == errorMessage));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ChatState&&const DeepCollectionEquality().equals(other._messages, _messages)&&(identical(other.isSending, isSending) || other.isSending == isSending)&&(identical(other.isOtherTyping, isOtherTyping) || other.isOtherTyping == isOtherTyping)&&(identical(other.errorMessage, errorMessage) || other.errorMessage == errorMessage));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(_messages),isLoading,isSending,isOtherTyping,errorMessage);
+int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(_messages),isSending,isOtherTyping,errorMessage);
 
 @override
 String toString() {
-  return 'ChatState(messages: $messages, isLoading: $isLoading, isSending: $isSending, isOtherTyping: $isOtherTyping, errorMessage: $errorMessage)';
+  return 'ChatState(messages: $messages, isSending: $isSending, isOtherTyping: $isOtherTyping, errorMessage: $errorMessage)';
 }
 
 
@@ -249,7 +247,7 @@ abstract mixin class _$ChatStateCopyWith<$Res> implements $ChatStateCopyWith<$Re
   factory _$ChatStateCopyWith(_ChatState value, $Res Function(_ChatState) _then) = __$ChatStateCopyWithImpl;
 @override @useResult
 $Res call({
- List<Message> messages, bool isLoading, bool isSending, bool isOtherTyping, String errorMessage
+ List<Message> messages, bool isSending, bool isOtherTyping, String errorMessage
 });
 
 
@@ -266,11 +264,10 @@ class __$ChatStateCopyWithImpl<$Res>
 
 /// Create a copy of ChatState
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? messages = null,Object? isLoading = null,Object? isSending = null,Object? isOtherTyping = null,Object? errorMessage = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? messages = null,Object? isSending = null,Object? isOtherTyping = null,Object? errorMessage = null,}) {
   return _then(_ChatState(
 messages: null == messages ? _self._messages : messages // ignore: cast_nullable_to_non_nullable
-as List<Message>,isLoading: null == isLoading ? _self.isLoading : isLoading // ignore: cast_nullable_to_non_nullable
-as bool,isSending: null == isSending ? _self.isSending : isSending // ignore: cast_nullable_to_non_nullable
+as List<Message>,isSending: null == isSending ? _self.isSending : isSending // ignore: cast_nullable_to_non_nullable
 as bool,isOtherTyping: null == isOtherTyping ? _self.isOtherTyping : isOtherTyping // ignore: cast_nullable_to_non_nullable
 as bool,errorMessage: null == errorMessage ? _self.errorMessage : errorMessage // ignore: cast_nullable_to_non_nullable
 as String,
